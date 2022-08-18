@@ -21,7 +21,7 @@ const AppBar = () => {
       <Link to='/' style={styles.tab}>
         <AppBarTab text="Repositories" />
       </Link>
-      <Link to='/login' style={styles.tab}>
+      <Link to='/signin' style={styles.tab}>
         <AppBarTab text="Sign in" />
       </Link>
     </ScrollView>
