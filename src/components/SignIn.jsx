@@ -14,9 +14,11 @@ const initialValues = {
 const validationSchema = yup.object().shape({
   username: yup
     .string()
+    .min(3, 'Username must have a min length of 3')
     .required('Username is required'),
   password: yup
     .string()
+    .min(6, 'Password must have a min length of 6')
     .required('Password is required')
 })
 
