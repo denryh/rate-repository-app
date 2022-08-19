@@ -28,18 +28,19 @@ const RepositoryItem = ({ item }) => {
 const infoStyles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        paddingHorizontal: 15,
     },
     ownerAvatar: {
         width: 40,
         height: 40,
         borderRadius: 3,
-        marginHorizontal: 10,
+        marginRight: 15,
     },
     language: {
         backgroundColor: theme.colors.primary,
         borderRadius: 3,
-        marginTop: 5,
-        padding: 3,
+        marginTop: 10,
+        padding: 5,
         alignSelf: 'flex-start'
     }
 })
@@ -52,7 +53,7 @@ const Info = ({ avatar, fullName, description, language }) => {
                 uri: avatar
             }}
             />
-        <View>
+        <View style={{ flex: 1 }}>
             <Text fontWeight="bold">{fullName}</Text>
             <Text color="textSecondary" style={{ marginTop: 5 }}>{description}</Text>
             <View style={infoStyles.language}>
@@ -64,7 +65,7 @@ const Info = ({ avatar, fullName, description, language }) => {
 
 const countStyles = StyleSheet.create({
     container: {
-        marginTop: 10,
+        marginTop: 15,
         flexDirection: 'row',
         justifyContent: 'space-around',
         textAlign: 'center',

@@ -13,3 +13,12 @@ export const GET_REPOSITORIES = gql`
         }
     }
 `
+
+export const SIGNED_IN = gql`
+    query SignedIn {
+        me {
+            id
+            username
+        }
+    }
+`
