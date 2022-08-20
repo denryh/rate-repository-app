@@ -1,16 +1,16 @@
-import { Image, View, StyleSheet } from 'react-native'
-import theme from '../../theme'
-import Text from '../Text'
+import { Image, View, StyleSheet } from "react-native";
+import theme from "../../theme";
+import Text from "../Text";
 
 const mainStyles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: "white",
         paddingVertical: 10,
     }
-})
+});
 
 const RepositoryItem = ({ item }) => {
-    return <View style={mainStyles.container}>
+    return <View testID="repositoryItem" style={mainStyles.container}>
         <Info
             avatar={item.ownerAvatarUrl} 
             fullName={item.fullName} 
@@ -22,12 +22,12 @@ const RepositoryItem = ({ item }) => {
             reviews={item.reviewCount}
             rating={item.ratingAverage}
         />
-    </View>
-}
+    </View>;
+};
 
 const infoStyles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
+        flexDirection: "row",
         paddingHorizontal: 15,
     },
     ownerAvatar: {
@@ -41,9 +41,9 @@ const infoStyles = StyleSheet.create({
         borderRadius: 3,
         marginTop: 10,
         padding: 5,
-        alignSelf: 'flex-start'
+        alignSelf: "flex-start"
     }
-})
+});
 
 const Info = ({ avatar, fullName, description, language }) => {
     return  <View style={infoStyles.container}>
@@ -52,7 +52,7 @@ const Info = ({ avatar, fullName, description, language }) => {
             source={{
                 uri: avatar
             }}
-            />
+        />
         <View style={{ flex: 1 }}>
             <Text fontWeight="bold">{fullName}</Text>
             <Text color="textSecondary" style={{ marginTop: 5 }}>{description}</Text>
@@ -60,17 +60,17 @@ const Info = ({ avatar, fullName, description, language }) => {
                 <Text style={{ color: "white" }}>{language}</Text>
             </View>
         </View>
-    </View>
-}
+    </View>;
+};
 
 const countStyles = StyleSheet.create({
     container: {
         marginTop: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        textAlign: 'center',
+        flexDirection: "row",
+        justifyContent: "space-around",
+        textAlign: "center",
     }
-})
+});
 
 const Counts = ({ stars, forks, reviews, rating }) => {
     return <View style={countStyles.container}>
@@ -90,7 +90,7 @@ const Counts = ({ stars, forks, reviews, rating }) => {
             <Text fontWeight="bold">{rating}</Text>
             <Text style={{ marginTop: 5 }}>Rating</Text>
         </View>
-    </View>
-}
+    </View>;
+};
 
-export default RepositoryItem
+export default RepositoryItem;

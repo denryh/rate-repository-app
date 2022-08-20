@@ -5,13 +5,16 @@
         "version": "detect"
         }
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"],
     "parser": "@babel/eslint-parser",
     "env": {
         "react-native/react-native": true
     },
     "rules": {
         "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "indent": ["error", 4],
+        "semi": ["error", "always"],
+        "quotes": ["error", "double"]
     }
 }
