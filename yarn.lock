@@ -1934,11 +1934,6 @@
   "resolved" "https://registry.npmjs.org/@types/prettier/-/prettier-2.7.0.tgz"
   "version" "2.7.0"
 
-"@types/qs@^6.5.3":
-  "integrity" "sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw=="
-  "resolved" "https://registry.npmjs.org/@types/qs/-/qs-6.9.7.tgz"
-  "version" "6.9.7"
-
 "@types/stack-utils@^2.0.0":
   "integrity" "sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw=="
   "resolved" "https://registry.npmjs.org/@types/stack-utils/-/stack-utils-2.0.1.tgz"
@@ -3069,6 +3064,11 @@
     "whatwg-mimetype" "^2.3.0"
     "whatwg-url" "^8.0.0"
 
+"date-fns@^2.29.2":
+  "integrity" "sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA=="
+  "resolved" "https://registry.npmjs.org/date-fns/-/date-fns-2.29.2.tgz"
+  "version" "2.29.2"
+
 "dayjs@^1.8.15":
   "integrity" "sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g=="
   "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.4.tgz"
@@ -3643,20 +3643,12 @@
     "path-browserify" "^1.0.0"
     "url-parse" "^1.4.4"
 
-"expo-constants@~13.0.2":
+"expo-constants@~13.0.0", "expo-constants@~13.0.2":
   "integrity" "sha512-vGs/kI65vplPFvG8z4W1ariGEtVHHp9Avl28G0zJprt2v/q1E/BnXjwvFSBPc1GB+Zb/7crWSHWRwjaFULBjsg=="
   "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-13.0.2.tgz"
   "version" "13.0.2"
   dependencies:
     "@expo/config" "^6.0.6"
-    "uuid" "^3.3.2"
-
-"expo-constants@~13.2.0":
-  "integrity" "sha512-2Rrp7GtSTeW7gNz3BsZ+AWMBbBaBnymELuo1ecTQ6fga8F5IRXgj1TW5yFpTmqOTtVfCiQfS0M1QO+JZEatPCQ=="
-  "resolved" "https://registry.npmjs.org/expo-constants/-/expo-constants-13.2.3.tgz"
-  "version" "13.2.3"
-  dependencies:
-    "@expo/config" "~7.0.0"
     "uuid" "^3.3.2"
 
 "expo-error-recovery@~3.0.5":
@@ -3684,16 +3676,15 @@
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-10.0.2.tgz"
   "version" "10.0.2"
 
-"expo-linking@^3.2.2":
-  "integrity" "sha512-2OY7WAyZXuc8zdTGm2rLu5ESJaFL2TYmPHsJuDJcfIJFaw+nS5vIVk5DGPlk+zCNC3uoqT02t7a5PZVp2bvqtQ=="
-  "resolved" "https://registry.npmjs.org/expo-linking/-/expo-linking-3.2.2.tgz"
-  "version" "3.2.2"
+"expo-linking@~3.0.0":
+  "integrity" "sha512-TgRB4JTdhMRo79rTu9E9zwzWyBUJxHpSbHFlv0ZfMAwU+qFCsL9zZsL44R/yj7xrvcLOjqbCVmBszLQ0pFOt1g=="
+  "resolved" "https://registry.npmjs.org/expo-linking/-/expo-linking-3.0.0.tgz"
+  "version" "3.0.0"
   dependencies:
-    "@types/qs" "^6.5.3"
-    "expo-constants" "~13.2.0"
+    "expo-constants" "~13.0.0"
     "invariant" "^2.2.4"
     "qs" "^6.9.1"
-    "url-parse" "^1.5.9"
+    "url-parse" "^1.4.4"
 
 "expo-modules-autolinking@0.5.5":
   "integrity" "sha512-bILEG0Fg+ZhIhdEaShHzsEN1WC0hUmXJ5Kcd4cd+8rVk1Ead9vRZxA/yLx1cNBDCOwMe0GAMrhF7TKT+A1P+YA=="
@@ -8102,7 +8093,7 @@
   "resolved" "https://registry.npmjs.org/urix/-/urix-0.1.0.tgz"
   "version" "0.1.0"
 
-"url-parse@^1.4.4", "url-parse@^1.5.9":
+"url-parse@^1.4.4":
   "integrity" "sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ=="
   "resolved" "https://registry.npmjs.org/url-parse/-/url-parse-1.5.10.tgz"
   "version" "1.5.10"

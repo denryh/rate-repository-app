@@ -34,7 +34,7 @@ const RepositoryList = () => {
 
     if (loading) return null;
     if (error) {
-        console.log();
+        console.log(error.message);
         return null;
     }
 

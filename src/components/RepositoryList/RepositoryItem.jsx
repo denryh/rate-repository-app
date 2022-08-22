@@ -11,28 +11,12 @@ const mainStyles = StyleSheet.create({
     }
 });
 
-const RepositoryItem = ({ item, isSingleView }) => {
+const RepositoryItem = ({ item }) => {
     const navigate = useNavigate();
 
     const handlePress = () => {
         navigate(`/${item.id}`);
     }; 
-
-    if (isSingleView) {
-        return <View testID="repositoryItem" style={mainStyles.container}>
-            <Info
-                avatar={item.ownerAvatarUrl} 
-                fullName={item.fullName} 
-                description={item.description}
-                language={item.language} />
-            <Counts 
-                stars={item.stargazersCount}
-                forks={item.forksCount}
-                reviews={item.reviewCount}
-                rating={item.ratingAverage}
-            />
-        </View>;
-    }
 
     return <Pressable testID="repositoryItem" onPress={handlePress} style={mainStyles.container}>
         <Info
@@ -69,7 +53,7 @@ const infoStyles = StyleSheet.create({
     }
 });
 
-const Info = ({ avatar, fullName, description, language }) => {
+export const Info = ({ avatar, fullName, description, language }) => {
     return  <View style={infoStyles.container}>
         <Image
             style   ={infoStyles.ownerAvatar}
@@ -96,7 +80,7 @@ const countStyles = StyleSheet.create({
     }
 });
 
-const Counts = ({ stars, forks, reviews, rating }) => {
+export const Counts = ({ stars, forks, reviews, rating }) => {
     return <View style={countStyles.container}>
         <View>
             <Text fontWeight="bold">{stars}</Text>
