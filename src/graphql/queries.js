@@ -1,5 +1,5 @@
-import { gql } from '@apollo/client'
-import { BASE_REPOSITORY_FIELDS } from './fragments'
+import { gql } from "@apollo/client";
+import { BASE_REPOSITORY_FIELDS } from "./fragments";
 
 export const GET_REPOSITORIES = gql`
     ${BASE_REPOSITORY_FIELDS}
@@ -12,7 +12,17 @@ export const GET_REPOSITORIES = gql`
             }
         }
     }
-`
+`;
+
+export const GET_REPO = gql`
+    ${BASE_REPOSITORY_FIELDS}
+    query GetRepo($repoId: ID!) {
+        repository(id: $repoId) {
+            ...BaseRepositoryFields,
+            url,
+        }
+    }
+`;
 
 export const SIGNED_IN = gql`
     query SignedIn {
@@ -21,4 +31,4 @@ export const SIGNED_IN = gql`
             username
         }
     }
-`
+`;

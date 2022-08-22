@@ -28,11 +28,15 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
-    const { data, loading } = useQuery(GET_REPOSITORIES, {
+    const { data, loading, error } = useQuery(GET_REPOSITORIES, {
         fetchPolicy: "cache-and-network"
     });
 
     if (loading) return null;
+    if (error) {
+        console.log();
+        return null;
+    }
 
     const repositories = data.repositories;
 

@@ -1,52 +1,61 @@
-import { Image, View, StyleSheet, Pressable } from "react-native";
-import { useNavigate } from "react-router-native";
+import { useParams } from "react-router-native";
+import { useQuery } from "@apollo/client";
+import * as Linking from "expo-linking";
 
-import theme from "../../theme";
-import Text from "../Text";
+import { GET_REPO } from "../graphql/queries";
+
+import { Image, View, StyleSheet, Pressable } from "react-native";
+import Text from "./Text";
+import theme from "../theme";
 
 const mainStyles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
         paddingVertical: 10,
+        backgroundColor: "white",
+    },
+    button: {
+        marginTop: 15,
+        marginHorizontal: 10,
+        borderRadius: 5,
+        padding: 20,
+        backgroundColor: theme.colors.primary,
     }
 });
 
-const RepositoryItem = ({ item, isSingleView }) => {
-    const navigate = useNavigate();
+const SingleRepoView = () => {
+    const { id } = useParams();
+    const { data, loading, error } = useQuery(GET_REPO, { variables: { repoId: id }});
 
-    const handlePress = () => {
-        navigate(`/${item.id}`);
-    }; 
-
-    if (isSingleView) {
-        return <View testID="repositoryItem" style={mainStyles.container}>
-            <Info
-                avatar={item.ownerAvatarUrl} 
-                fullName={item.fullName} 
-                description={item.description}
-                language={item.language} />
-            <Counts 
-                stars={item.stargazersCount}
-                forks={item.forksCount}
-                reviews={item.reviewCount}
-                rating={item.ratingAverage}
-            />
-        </View>;
+    if (loading) return null;
+    if (error) {
+        console.log(error.message);
+        return null;
     }
 
-    return <Pressable testID="repositoryItem" onPress={handlePress} style={mainStyles.container}>
+    const repository = data.repository;
+    console.log(repository);
+    
+    const handlePress = () => {
+        Linking.openURL(repository.url);
+    };
+    
+
+    return <View style={mainStyles.container}>
         <Info
-            avatar={item.ownerAvatarUrl} 
-            fullName={item.fullName} 
-            description={item.description}
-            language={item.language} />
+            avatar={repository.ownerAvatarUrl} 
+            fullName={repository.fullName} 
+            description={repository.description}
+            language={repository.language} />
         <Counts 
-            stars={item.stargazersCount}
-            forks={item.forksCount}
-            reviews={item.reviewCount}
-            rating={item.ratingAverage}
+            stars={repository.stargazersCount}
+            forks={repository.forksCount}
+            reviews={repository.reviewCount}
+            rating={repository.ratingAverage}
         />
-    </Pressable>;
+        <Pressable onPress={handlePress} style={mainStyles.button}>
+            <Text fontWeight="bold" style={{ color: "white", textAlign: "center" }}>Open in GitHub</Text>
+        </Pressable>
+    </View>;
 };
 
 const infoStyles = StyleSheet.create({
@@ -117,4 +126,5 @@ const Counts = ({ stars, forks, reviews, rating }) => {
     </View>;
 };
 
-export default RepositoryItem;
+
+export default SingleRepoView;

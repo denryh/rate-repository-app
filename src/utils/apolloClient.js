@@ -1,12 +1,12 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
-import Constants from 'expo-constants'
-import { setContext } from '@apollo/client/link/context'
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import Constants from "expo-constants";
+import { setContext } from "@apollo/client/link/context";
 
-const { apolloUri } = Constants.manifest.extra
+const { apolloUri } = Constants.manifest.extra;
 
 const httpLink = createHttpLink({
     uri: apolloUri,
-})
+});
 
 const createApolloClient = (authStorage) => {
     const authLink = setContext(async (_, { headers }) => {
@@ -15,21 +15,21 @@ const createApolloClient = (authStorage) => {
             return {
                 headers: {
                     ...headers,
-                    authorization: accessToken ? `Bearer ${accessToken}` : '',
+                    authorization: accessToken ? `Bearer ${accessToken}` : "",
                 }
-            }
+            };
         } catch (e) {
-            console.log(e)
+            console.log(e);
             return {
                 headers,
-            }
+            };
         }
-    })
+    });
 
     return new ApolloClient({
         link: authLink.concat(httpLink),
         cache: new InMemoryCache(),
-    })
-}
+    });
+};
 
-export default createApolloClient
+export default createApolloClient;
