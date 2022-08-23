@@ -1,9 +1,9 @@
-import { useQuery } from "@apollo/client";
+import useRepositories from "../../hooks/useRepositories";
+
 import { FlatList, View, StyleSheet } from "react-native";
-
-import { GET_REPOSITORIES } from "../../graphql/queries";
-
 import RepositoryItem from "./RepositoryItem";
+import { useState } from "react";
+import Order from "./Order";
 
 const styles = StyleSheet.create({
     separator: {
@@ -28,19 +28,17 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
-    const { data, loading, error } = useQuery(GET_REPOSITORIES, {
-        fetchPolicy: "cache-and-network"
+    const [order, setOrder] = useState({
+        orderBy: "CREATED_AT",
+        orderDirection: "DESC",
     });
 
-    if (loading) return null;
-    if (error) {
-        console.log(error.message);
-        return null;
-    }
+    const { repositories } = useRepositories(order);
 
-    const repositories = data.repositories;
-
-    return <RepositoryListContainer repositories={repositories} />;
+    return <>
+        <Order setOrder={setOrder} />
+        {repositories ? <RepositoryListContainer repositories={repositories} /> : null }
+    </>;
 };
 
 export default RepositoryList;

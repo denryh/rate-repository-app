@@ -3,8 +3,8 @@ import { BASE_REPOSITORY_FIELDS } from "./fragments";
 
 export const GET_REPOSITORIES = gql`
     ${BASE_REPOSITORY_FIELDS}
-    query {
-        repositories {
+    query GetRepositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection) {
+        repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
             edges {
                 node {
                     ...BaseRepositoryFields
