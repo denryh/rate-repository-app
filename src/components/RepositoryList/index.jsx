@@ -1,9 +1,11 @@
 import useRepositories from "../../hooks/useRepositories";
+import { useState } from "react";
+import { useDebounce } from "use-debounce";
 
 import { FlatList, View, StyleSheet } from "react-native";
 import RepositoryItem from "./RepositoryItem";
-import { useState } from "react";
 import Order from "./Order";
+
 
 const styles = StyleSheet.create({
     separator: {
@@ -33,10 +35,13 @@ const RepositoryList = () => {
         orderDirection: "DESC",
     });
 
-    const { repositories } = useRepositories(order);
+    const [searchKeyword, setSearchKeyword] = useState();
+    const [value] = useDebounce(searchKeyword, 500);
+
+    const { repositories } = useRepositories(order, value);
 
     return <>
-        <Order setOrder={setOrder} />
+        <Order setOrder={setOrder} searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword} />
         {repositories ? <RepositoryListContainer repositories={repositories} /> : null }
     </>;
 };
