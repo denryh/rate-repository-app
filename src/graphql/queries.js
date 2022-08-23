@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { BASE_REPOSITORY_FIELDS } from "./fragments";
+import { BASE_REPOSITORY_FIELDS, BASE_REVIEW_FIELDS } from "./fragments";
 
 export const GET_REPOSITORIES = gql`
     ${BASE_REPOSITORY_FIELDS}
@@ -32,6 +32,7 @@ export const GET_REPOSITORIES = gql`
 
 export const GET_REPO = gql`
     ${BASE_REPOSITORY_FIELDS}
+    ${BASE_REVIEW_FIELDS}
     query GetRepo($repoId: ID!, $first: Int, $after: String) {
         repository(id: $repoId) {
             ...BaseRepositoryFields,
@@ -39,14 +40,7 @@ export const GET_REPO = gql`
             reviews(first: $first, after: $after) {
                 edges {
                     node {
-                        id
-                        text
-                        rating
-                        createdAt
-                        user {
-                            id
-                            username
-                        }
+                        ...BaseReviewFields
                     }
                 }
                 pageInfo {
@@ -59,10 +53,22 @@ export const GET_REPO = gql`
 `;
 
 export const SIGNED_IN = gql`
-    query SignedIn {
+    ${BASE_REVIEW_FIELDS}
+    query SignedIn($first: Int, $after: String, $includeReviews: Boolean = false) {
         me {
             id
             username
+            reviews(first: $first, after: $after) @include(if: $includeReviews) {
+                edges {
+                    node {
+                        ...BaseReviewFields
+                    }
+                }
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                }
+            }
         }
     }
 `;

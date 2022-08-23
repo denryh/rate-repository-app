@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from "@apollo/client";
 
 export const BASE_REPOSITORY_FIELDS = gql`
     fragment BaseRepositoryFields on Repository {
@@ -12,4 +12,20 @@ export const BASE_REPOSITORY_FIELDS = gql`
         description
         language
     }
-`
+`;
+
+export const BASE_REVIEW_FIELDS = gql`
+    fragment BaseReviewFields on Review {
+        id
+        text
+        rating
+        createdAt
+        repository {
+            fullName
+        }
+        user {
+            id
+            username
+        }
+    }
+`;
