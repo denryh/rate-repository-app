@@ -115,8 +115,6 @@ const SingleRepository = () => {
         });
     };
     
-    console.log(repository.reviews);
-
     return <>
         <RepositoryInfo handlePress={handlePress} repository={repository} />
         <ItemSeparator />

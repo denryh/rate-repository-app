@@ -22,6 +22,7 @@ export const BASE_REVIEW_FIELDS = gql`
         createdAt
         repository {
             fullName
+            id
         }
         user {
             id
