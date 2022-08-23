@@ -10,40 +10,6 @@ import { Info, Counts } from "./RepositoryList/RepositoryItem";
 import Text from "./Text";
 import theme from "../theme";
 
-const SingleRepository = () => {
-    const { id } = useParams();
-    const { data, loading, error } = useQuery(GET_REPO, { 
-        variables: { repoId: id }, 
-        fetchPolicy: "cache-and-network"
-    });
-
-    if (loading) return null;
-    if (error) {
-        console.log(error.message);
-        return null;
-    }
-
-    const repository = data.repository;
-    const reviewNodes = repository.reviews 
-        ? repository.reviews.edges.map((edge) => edge.node)
-        : [];
-    
-    const handlePress = () => {
-        Linking.openURL(repository.url);
-    };
-    
-
-    return <>
-        <RepositoryInfo handlePress={handlePress} repository={repository} />
-        <ItemSeparator />
-        <FlatList 
-            data={reviewNodes}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={({ item }) => <ReviewItem key={item.id} review={item} />}
-        />
-    </>;
-};
-
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
@@ -116,5 +82,49 @@ const ReviewItem = ({ review }) => {
     </View>;
 };
 
+const SingleRepository = () => {
+    const { id } = useParams();
+    const { data, loading, error, fetchMore } = useQuery(GET_REPO, { 
+        variables: { repoId: id, first: 2 }, 
+        fetchPolicy: "cache-and-network"
+    });
+
+    if (loading) return null;
+    if (error) return console.log(error.message) || null;
+
+    const repository = data.repository;
+    const reviewNodes = repository.reviews 
+        ? repository.reviews.edges.map((edge) => edge.node)
+        : [];
+    
+    const handlePress = () => {
+        Linking.openURL(repository.url);
+    };
+
+    const onEndReached = () => {
+        const canFetchMore = !loading && repository.reviews.pageInfo.hasNextPage;
+
+        if (!canFetchMore) return null;
+
+        fetchMore({
+            variables: {
+                repoId: id,
+                first: 2,
+                after: repository.reviews.pageInfo.endCursor,
+            }
+        });
+    };
+
+    return <>
+        <RepositoryInfo handlePress={handlePress} repository={repository} />
+        <ItemSeparator />
+        <FlatList 
+            data={reviewNodes}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={({ item }) => <ReviewItem key={item.id} review={item} />}
+            onEndReached={onEndReached}
+        />
+    </>;
+};
 
 export default SingleRepository;

@@ -38,6 +38,7 @@ const CreateReview = () => {
 
     const handleSubmit = async ({ rating, ...values }) => {
         const data = await createReview({ ...values, rating: parseInt(rating) });
+        console.log("created review");
         navigate(`/${data.createReview.repositoryId}`);
     };
     

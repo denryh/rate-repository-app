@@ -23,8 +23,8 @@ const validationSchema = yup.object().shape({
         .required("Username is required"),
     password: yup
         .string()
-        .min(5, "Username length must be between 1 and 30")
-        .max(50, "Username length must be between 1 and 30")
+        .min(5, "Password length must be between 5 and 50")
+        .max(50, "Password length must be between 5 and 50")
         .required("Password is required"),
     passwordConfirm: yup
         .string()

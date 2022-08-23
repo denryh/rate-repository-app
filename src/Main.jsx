@@ -5,7 +5,7 @@ import AppBar from "./components/AppBar";
 import RepositoryList from "./components/RepositoryList";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import RepositoryInfo from "./components/RepositoryInfo";
+import SingleRepository from "./components/SingleRepository";
 import theme from "./theme";
 import CreateReview from "./components/CreateReview";
 
@@ -23,7 +23,7 @@ const Main = () => {
             <AppBar />
             <Routes>
                 <Route path='/' element={<RepositoryList />} />
-                <Route path='/:id' element={<RepositoryInfo />} />
+                <Route path='/:id' element={<SingleRepository />} />
                 <Route path='/create-review' element={<CreateReview />} />
                 <Route path='/sign-in' element={<SignIn />} />
                 <Route path='/sign-up' element={<SignUp />} />

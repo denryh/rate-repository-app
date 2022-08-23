@@ -15,16 +15,21 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, fetchMore }) => {
     const repositoryNodes = repositories
         ? repositories.edges.map((edge) => edge.node)
         : [];
   
+    const OnEndReached = () => {
+        fetchMore();
+    };
+
     return (
         <FlatList
             data={repositoryNodes}
             ItemSeparatorComponent={ItemSeparator}
             renderItem={({ item }) => <RepositoryItem key={item.id} item={item} />}
+            onEndReached={OnEndReached}
         />
     );
 };
@@ -38,11 +43,17 @@ const RepositoryList = () => {
     const [searchKeyword, setSearchKeyword] = useState();
     const [value] = useDebounce(searchKeyword, 500);
 
-    const { repositories } = useRepositories(order, value);
+    const variables = {
+        ...order,
+        searchKeyword: value,
+        first: 2,
+    };
+
+    const { repositories, fetchMore } = useRepositories(variables);
 
     return <>
         <Order setOrder={setOrder} searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword} />
-        {repositories ? <RepositoryListContainer repositories={repositories} /> : null }
+        {repositories ? <RepositoryListContainer repositories={repositories} fetchMore={fetchMore} /> : null }
     </>;
 };
 
