@@ -41,7 +41,12 @@ const AppBar = () => {
                 <AppBarTab text="Repositories" />
             </Link>
             {data.me
-                ? <AppBarTab style={styles.tab} text="Sign out" onPress={signOut} />
+                ? <>
+                    <Link to='/create-review' style={styles.tab}>
+                        <AppBarTab text="Create a review" />
+                    </Link>
+                    <AppBarTab style={styles.tab} text="Sign out" onPress={signOut} />
+                </>
                 : <Link to='/signin' style={styles.tab}>
                     <AppBarTab text="Sign in" />
                 </Link>

@@ -40,10 +40,8 @@ const SignIn = () => {
     const [signIn] = useSignIn();
 
     const onSubmit = async (values) => {
-        const { username, password } = values;
-
         try {
-            const data = await signIn({ username, password });
+            const data = await signIn(values);
             navigate("/");
             console.log(data);
         } catch (e) {
@@ -61,14 +59,6 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         alignItems: "stretch"
     },
-    textInput: {
-        marginTop: 10,
-        padding: 15,
-        borderColor: theme.colors.textSecondary,
-        borderStyle: "solid",
-        borderWidth: 1,
-        borderRadius: 3,
-    },
     button: {
         marginTop: 10,
         backgroundColor: theme.colors.primary,
@@ -80,13 +70,11 @@ const styles = StyleSheet.create({
 const SignInForm = ({ onSubmit }) => {
     return <View style={styles.container}>
         <FormikTextInput 
-            style={styles.textInput} 
             name="username" 
             placeholder="Username" 
             placeholderTextColor={theme.colors.textSecondary} 
         />
         <FormikTextInput 
-            style={styles.textInput} 
             name="password" 
             placeholder="Password" 
             placeholderTextColor={theme.colors.textSecondary} 

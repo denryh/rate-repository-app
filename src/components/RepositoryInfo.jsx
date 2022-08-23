@@ -10,6 +10,40 @@ import { Info, Counts } from "./RepositoryList/RepositoryItem";
 import Text from "./Text";
 import theme from "../theme";
 
+const SingleRepository = () => {
+    const { id } = useParams();
+    const { data, loading, error } = useQuery(GET_REPO, { 
+        variables: { repoId: id }, 
+        fetchPolicy: "cache-and-network"
+    });
+
+    if (loading) return null;
+    if (error) {
+        console.log(error.message);
+        return null;
+    }
+
+    const repository = data.repository;
+    const reviewNodes = repository.reviews 
+        ? repository.reviews.edges.map((edge) => edge.node)
+        : [];
+    
+    const handlePress = () => {
+        Linking.openURL(repository.url);
+    };
+    
+
+    return <>
+        <RepositoryInfo handlePress={handlePress} repository={repository} />
+        <ItemSeparator />
+        <FlatList 
+            data={reviewNodes}
+            ItemSeparatorComponent={ItemSeparator}
+            renderItem={({ item }) => <ReviewItem key={item.id} review={item} />}
+        />
+    </>;
+};
+
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
@@ -80,37 +114,6 @@ const ReviewItem = ({ review }) => {
             <Text style={{ marginTop: 10 }}>{review.text}</Text>
         </View>
     </View>;
-};
-
-const SingleRepository = () => {
-    const { id } = useParams();
-    const { data, loading, error } = useQuery(GET_REPO, { variables: { repoId: id }});
-
-    if (loading) return null;
-    if (error) {
-        console.log(error.message);
-        return null;
-    }
-
-    const repository = data.repository;
-    const reviewNodes = repository.reviews 
-        ? repository.reviews.edges.map((edge) => edge.node)
-        : [];
-    
-    const handlePress = () => {
-        Linking.openURL(repository.url);
-    };
-    
-
-    return <>
-        <RepositoryInfo handlePress={handlePress} repository={repository} />
-        <ItemSeparator />
-        <FlatList 
-            data={reviewNodes}
-            ItemSeparatorComponent={ItemSeparator}
-            renderItem={({ item }) => <ReviewItem key={item.id} review={item} />}
-        />
-    </>;
 };
 
 
