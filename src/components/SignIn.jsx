@@ -72,13 +72,11 @@ const SignInForm = ({ onSubmit }) => {
         <FormikTextInput 
             name="username" 
             placeholder="Username" 
-            placeholderTextColor={theme.colors.textSecondary} 
         />
         <FormikTextInput 
             name="password" 
             placeholder="Password" 
-            placeholderTextColor={theme.colors.textSecondary} 
-            secureTextEntry 
+            secureTextEntry
         />
         <Pressable style={styles.button} onPress={onSubmit}>
             <Text fontWeight='bold' style={{ textAlign: "center", color: "white" }}>Sign in</Text>

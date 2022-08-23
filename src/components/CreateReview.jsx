@@ -71,20 +71,16 @@ const CreateReviewForm = ({ onSubmit }) => {
     return <View style={styles.container}>
         <FormikTextInput
             name="ownerName"
-            placeholder="Repository owner name"
-            placeholderTextColor={theme.colors.textSecondary} />
+            placeholder="Repository owner name" />
         <FormikTextInput
             name="repositoryName"
-            placeholder="Repository name"
-            placeholderTextColor={theme.colors.textSecondary} />
+            placeholder="Repository name" />
         <FormikTextInput 
             name="rating"
-            placeholder="Rating between 0 and 100"
-            placeholderTextColor={theme.colors.textSecondary} />
+            placeholder="Rating between 0 and 100" />
         <FormikTextInput 
             name="text"
-            placeholder="Review"
-            placeholderTextColor={theme.colors.textSecondary} />
+            placeholder="Review" />
         <Pressable style={styles.button} onPress={onSubmit}>
             <Text fontWeight='bold' style={{ textAlign: "center", color: "white" }}>Create a review</Text>
         </Pressable>
